@@ -38,14 +38,12 @@ var listen = function(id, token){
 
     ws.onmessage = function(event) {
         var bitdata = $.parseJSON(event.data)
-        console.log(bitdata.type)
         if (bitdata.type == "MESSAGE") {
             var bitmessage = $.parseJSON(bitdata.data.message);
             //var msg = bitmessage.chat_message.replace(/\bcheer\S+/ig, ""); // clears out all the "cheer"s
             var amount = bitmessage.bits_used;
             var userName = bitmessage.user_name;
 
-            console.log("Spawning bit with amount: " + amount + " and username: " + userName);
             PlinkoEngine.spawnBit(parseInt(amount), userName);
         }
         else{
